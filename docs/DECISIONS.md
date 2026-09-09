@@ -27,6 +27,8 @@ This register records durable Aevum decisions. Significant architectural decisio
 | D-011 | Keep BUILD scopes small enough to implement, test, review, and commit independently. | FINALIZED | Historical planning phases may need implementation slicing. |
 | D-012 | Freeze long-range roadmap expansion at **Phase 3B.8** during repository-baseline transition. | FINALIZED | Resume only through a later planning decision. |
 | D-013 | Consolidate Phase 3A sub-phases into `PHASE-03A.md` and Phase 3B sub-phases into `PHASE-03B.md`. | FINALIZED | Conceptual sub-phase boundaries remain intact. |
+| D-014 | Preserve `docs/phases/` as the historical planning archive and use **`docs/implementation/` as the canonical location for real PSB implementation contracts**. | FINALIZED | BUILD agents must execute only an active implementation contract that reaches `READY_FOR_BUILD`. |
+| D-015 | Use an initial **modular-monolith architecture direction** for the Aevum backend/application services, preserving clear logical responsibility boundaries without prematurely introducing microservices. | FINALIZED | A later approved decision may split runtime services when a demonstrated requirement justifies it. |
 
 ## Provisional / unresolved architecture areas
 
@@ -52,4 +54,4 @@ Earlier planning leaned toward `Projects` as a central organizing concept. Later
 
 ## Migration note
 
-An unavailable exact historical detail is recorded as a migration gap in the relevant phase document; it is not automatically classified as an unresolved product decision.
+An unavailable exact historical detail is recorded as a migration gap in the relevant historical phase document; it is not automatically classified as an unresolved product decision.
