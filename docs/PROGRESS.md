@@ -13,19 +13,21 @@
 
 ## Current PSB activity
 
-Prepare the repository checkpoint for **Implementation Phase 1 — Executable Application Foundation** after PLAN approval.
+**Implementation Phase 1 — Executable Application Foundation** has completed PLAN and SPEC review and is now ready for implementation.
 
-The approved PLAN is now represented in:
+The canonical approved implementation contract is:
 
 - `docs/implementation/PHASE-01.md`
 
 Current phase state:
 
 - PLAN: `PLAN_APPROVED`
-- SPEC: `NOT_STARTED`
-- Build eligibility: `NOT_READY_FOR_BUILD`
+- SPEC: `SPEC_APPROVED`
+- Build eligibility: `READY_FOR_BUILD`
+- Application implementation: `NOT STARTED`
+- Current BUILD: `NONE`
 
-No application code is authorized by the PLAN checkpoint.
+`READY_FOR_BUILD` authorizes the next PSB transition, but the phase is not `BUILDING` until Codex actually begins implementation.
 
 ## Milestones
 
@@ -36,8 +38,8 @@ No application code is authorized by the PLAN checkpoint.
 | Repository Baseline v1 | COMPLETE |
 | Implementation-phase documentation convention | ADOPTED |
 | Implementation Phase 1 PLAN | APPROVED |
-| Implementation Phase 1 SPEC | NOT STARTED |
-| Implementation Phase 1 READY_FOR_BUILD | NOT READY |
+| Implementation Phase 1 SPEC | APPROVED |
+| Implementation Phase 1 READY_FOR_BUILD | READY |
 | Application code | NOT STARTED |
 
 ## Current implementation phase
@@ -54,9 +56,9 @@ Canonical implementation contract:
 
 ## Next milestone
 
-Prepare the SPEC for Implementation Phase 1 only after explicit PSB instruction to proceed.
+Begin the Codex BUILD for Implementation Phase 1 only when explicitly instructed to start implementation.
 
-SPEC must resolve the BUILD-blocking implementation details identified by the approved PLAN and must pass review before the phase can become `READY_FOR_BUILD`.
+At that point, `docs/implementation/PHASE-01.md` is the authoritative BUILD contract. The BUILD must remain inside the approved PLAN/SPEC scope and preserve all non-goals, acceptance criteria, Definition of Done, versions, and contracts.
 
 ## Status rule
 

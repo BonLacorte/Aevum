@@ -65,4 +65,6 @@ See:
 
 - [`PHASE-01.md`](PHASE-01.md) — **Implementation Phase 1 — Executable Application Foundation**
   - PLAN: `PLAN_APPROVED`
-  - Build eligibility: `NOT_READY_FOR_BUILD`
+  - SPEC: `SPEC_APPROVED`
+  - Build eligibility: `READY_FOR_BUILD`
+  - BUILD: `NOT_STARTED`
