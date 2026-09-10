@@ -67,7 +67,7 @@ Real implementation phases are independently scoped through PSB and tracked unde
 
 | Implementation phase | Purpose | Current state |
 |---|---|---|
-| Implementation Phase 1 — Executable Application Foundation | Prove the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation without implementing major Aevum product features. | Revised PLAN `PLAN_APPROVED`; previous SPEC `SPEC_INVALIDATED`; replacement SPEC `NOT_STARTED`; `NOT_READY_FOR_BUILD`; BUILD `BLOCKED` |
+| Implementation Phase 1 — Executable Application Foundation | Prove the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation without implementing major Aevum product features. | PLAN `PLAN_APPROVED`; previous SPEC `SPEC_INVALIDATED`; replacement SPEC `SPEC_APPROVED`; `READY_FOR_BUILD`; BUILD `NOT_STARTED` |
 
 Canonical contract:
 
@@ -81,6 +81,6 @@ Future implementation phases must be created through the PSB process rather than
 
 Do not create Phase 3B.9 as part of this correction.
 
-The revised PLAN for **Implementation Phase 1 — Executable Application Foundation** is approved.
+The revised PLAN and replacement NestJS/TypeScript SPEC for **Implementation Phase 1 — Executable Application Foundation** are approved.
 
-The next PSB stage is the replacement SPEC, which remains `NOT_STARTED` at this checkpoint. The phase must not re-enter BUILD until that regenerated SPEC resolves the NestJS-specific implementation details, passes PSB review, and the canonical contract is explicitly restored to `READY_FOR_BUILD`.
+The phase is now `READY_FOR_BUILD`. The next PSB lifecycle transition occurs only when Codex is explicitly instructed to start implementation. Until then, BUILD remains `NOT_STARTED` and the phase is not `BUILDING`.

@@ -9,18 +9,18 @@ Aevum is a long-term personal organizational intelligence system designed to hel
 - Historical planning archive: **`docs/phases/`**
 - Canonical implementation contracts: **`docs/implementation/`**
 - Current implementation phase: **Implementation Phase 1 — Executable Application Foundation**
-- Revised PLAN status: **`PLAN_APPROVED`**
+- PLAN status: **`PLAN_APPROVED`**
 - Previous SPEC status: **`SPEC_INVALIDATED`**
-- Replacement SPEC status: **`NOT_STARTED`**
-- Build eligibility: **`NOT_READY_FOR_BUILD`**
-- BUILD status: **`BLOCKED`**
-- Previous BUILD attempt: **halted before commit**
-- Accepted/committed Phase 1 application implementation: **none**
+- Replacement SPEC status: **`SPEC_APPROVED`**
+- Build eligibility: **`READY_FOR_BUILD`**
+- BUILD status: **`NOT_STARTED`**
+- Previous Spring Boot BUILD attempt: **halted before commit and never accepted**
+- Accepted/committed implementation from that invalidated BUILD: **none**
 - Development workflow: **PSB — Plan → Spec → Build**
 
 A repository migration correction restored Aevum's historical backend stack from the incorrectly imported Java + Spring Boot entry to **NestJS + TypeScript**. The previous Spring Boot Implementation Phase 1 SPEC is invalid and no longer authorizes BUILD.
 
-The revised Implementation Phase 1 PLAN is approved. The previous Spring Boot SPEC remains invalidated, and the replacement SPEC has not started. Application implementation must not resume until a replacement SPEC is prepared, approved through PSB review, and the canonical implementation contract again reaches `READY_FOR_BUILD`.
+The revised Implementation Phase 1 PLAN and replacement NestJS/TypeScript SPEC are approved. The previous Spring Boot SPEC remains invalidated. The phase is `READY_FOR_BUILD`, but implementation has not started; Codex must receive an explicit BUILD instruction before the phase may enter `BUILDING`.
 
 ## Technology direction
 
@@ -68,12 +68,12 @@ Implementation Phase 1 has been returned to PLAN because its previous Java/Sprin
 
 Current lifecycle:
 
-- revised PLAN: `PLAN_APPROVED`;
+- PLAN: `PLAN_APPROVED`;
 - previous SPEC: `SPEC_INVALIDATED`;
-- replacement SPEC: `NOT_STARTED`;
-- build eligibility: `NOT_READY_FOR_BUILD`;
-- BUILD: `BLOCKED`;
-- previous BUILD attempt: halted before commit;
-- accepted/committed application implementation: none.
+- replacement SPEC: `SPEC_APPROVED`;
+- build eligibility: `READY_FOR_BUILD`;
+- BUILD: `NOT_STARTED`;
+- previous Spring Boot BUILD attempt: halted before commit and never accepted;
+- accepted/committed implementation from that invalidated BUILD: none.
 
-No application source code should be written from the invalidated SPEC.
+Only the approved replacement NestJS/TypeScript SPEC may govern the next BUILD. `READY_FOR_BUILD` does not mean implementation has started.

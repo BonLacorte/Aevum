@@ -66,12 +66,12 @@ See:
 ## Current implementation phase
 
 - [`PHASE-01.md`](PHASE-01.md) — **Implementation Phase 1 — Executable Application Foundation**
-  - revised PLAN: `PLAN_APPROVED`
+  - PLAN: `PLAN_APPROVED`
   - previous SPEC: `SPEC_INVALIDATED`
-  - replacement SPEC: `NOT_STARTED`
-  - Build eligibility: `NOT_READY_FOR_BUILD`
-  - BUILD: `BLOCKED`
-  - Previous BUILD attempt: halted before commit
-  - Accepted/committed Phase 1 implementation: none
+  - replacement SPEC: `SPEC_APPROVED`
+  - Build eligibility: `READY_FOR_BUILD`
+  - BUILD: `NOT_STARTED`
+  - Previous Spring Boot BUILD attempt: halted before commit and never accepted
+  - Accepted/committed implementation from that invalidated BUILD: none
 
-The previous Java/Spring Boot SPEC is not an executable contract. The revised PLAN is approved, but the replacement SPEC remains `NOT_STARTED`. Phase 1 must pass replacement SPEC review before it can return to `READY_FOR_BUILD`.
+The approved replacement NestJS/TypeScript SPEC is the canonical BUILD contract. `READY_FOR_BUILD` authorizes implementation only after Codex receives an explicit BUILD instruction; the phase is not yet `BUILDING`.

@@ -9,7 +9,7 @@
 - Implementation contract location: **`docs/implementation/`**
 - Further historical roadmap expansion: **HALTED**
 - Accepted/committed Phase 1 application implementation: **NONE**
-- Current BUILD: **`BLOCKED` — halted before commit due specification defect**
+- Current BUILD: **`NOT_STARTED` — replacement NestJS/TypeScript SPEC is approved and READY_FOR_BUILD; Codex has not yet received an explicit BUILD instruction**
 
 ## Current PSB activity
 
@@ -27,21 +27,25 @@ PostgreSQL + pgvector
 
 The initial modular-monolith direction remains active.
 
-The previous Spring Boot Implementation Phase 1 SPEC is invalid and no longer authorizes implementation.
+The previous Spring Boot Implementation Phase 1 SPEC remains invalid and does not authorize implementation. Its associated BUILD was halted before commit and was never accepted.
+
+The replacement NestJS/TypeScript SPEC has passed PSB review.
 
 Current phase state:
 
-- revised PLAN: `PLAN_APPROVED`
+- PLAN: `PLAN_APPROVED`
 - previous SPEC: `SPEC_INVALIDATED`
-- replacement SPEC: `NOT_STARTED`
-- Build eligibility: `NOT_READY_FOR_BUILD`
-- BUILD: `BLOCKED`
-- Previous BUILD attempt: **HALTED BEFORE COMMIT**
-- Accepted/committed application implementation: **NONE**
+- replacement SPEC: `SPEC_APPROVED`
+- Build eligibility: `READY_FOR_BUILD`
+- BUILD: `NOT_STARTED`
+- Previous Spring Boot BUILD attempt: **HALTED BEFORE COMMIT / NEVER ACCEPTED**
+- Accepted/committed implementation from that invalidated BUILD: **NONE**
 
-Canonical current PLAN:
+Canonical current implementation contract:
 
 - `docs/implementation/PHASE-01.md`
+
+`READY_FOR_BUILD` authorizes implementation only when Codex receives an explicit BUILD instruction. The phase is not yet `BUILDING`.
 
 ## Milestones
 
@@ -55,10 +59,11 @@ Canonical current PLAN:
 | Implementation Phase 1 original PLAN | INVALIDATED IN PART BY BACKEND MIGRATION DEFECT |
 | Implementation Phase 1 revised PLAN | APPROVED |
 | Implementation Phase 1 previous SPEC | INVALIDATED |
-| Implementation Phase 1 replacement SPEC | NOT STARTED |
-| Implementation Phase 1 READY_FOR_BUILD | REVOKED / NOT READY |
-| Implementation Phase 1 BUILD | BLOCKED / HALTED BEFORE COMMIT |
-| Accepted/committed Phase 1 application code | NONE |
+| Implementation Phase 1 replacement SPEC | APPROVED |
+| Implementation Phase 1 READY_FOR_BUILD | READY |
+| Current replacement BUILD | NOT STARTED |
+| Previous Spring Boot BUILD attempt | HALTED BEFORE COMMIT / NEVER ACCEPTED |
+| Accepted/committed implementation from invalidated BUILD | NONE |
 
 ## Current implementation phase
 
@@ -82,15 +87,15 @@ NestJS + TypeScript backend
 PostgreSQL + pgvector
 ```
 
-Canonical implementation PLAN:
+Canonical implementation contract:
 
 - `docs/implementation/PHASE-01.md`
 
 ## Next milestone
 
-The revised Implementation Phase 1 PLAN is approved.
+Implementation Phase 1 is `READY_FOR_BUILD`.
 
-The replacement SPEC is `NOT_STARTED` at this checkpoint. When explicitly begun, it must resolve the reopened NestJS/toolchain/project-structure/database-access/migration/API/testing/runtime-configuration decisions and pass PSB review before the phase can become `READY_FOR_BUILD` again.
+The next lifecycle transition occurs only when Codex is explicitly instructed to begin the approved BUILD. Until then, current BUILD remains `NOT_STARTED` and the phase must not be marked `BUILDING`.
 
 ## Status rule
 
