@@ -1,79 +1,103 @@
 # Aevum
 
-Aevum is a long-term personal organizational intelligence system designed to help people capture, organize, revisit, and understand meaningful life context. It combines structured personal information with AI-assisted retrieval and reasoning so that goals, decisions, activities, reflections, and other life context can become more useful over time.
+Aevum’s Phase 1 foundation is a minimal local application path:
 
-## Repository status
+```text
+Browser → Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector
+```
 
-- Repository baseline: **v1 — complete, with backend-stack historical correction recorded**
-- Historical planning coverage: **Phase 1 through Phase 3B.8**
-- Historical planning archive: **`docs/phases/`**
-- Canonical implementation contracts: **`docs/implementation/`**
-- Current implementation phase: **Implementation Phase 1 — Executable Application Foundation**
-- PLAN status: **`PLAN_APPROVED`**
-- Previous SPEC status: **`SPEC_INVALIDATED`**
-- Replacement SPEC status: **`SPEC_APPROVED`**
-- Build eligibility: **`READY_FOR_BUILD`**
-- BUILD status: **`NOT_STARTED`**
-- Previous Spring Boot BUILD attempt: **halted before commit and never accepted**
-- Accepted/committed implementation from that invalidated BUILD: **none**
-- Development workflow: **PSB — Plan → Spec → Build**
+It provides only a foundation-status screen and `GET /api/system/status`. No product domains, authentication, AI behavior, embeddings, or vector search are part of this phase. Implementation Phase 1 is `VERIFIED` and `CLOSED`.
 
-A repository migration correction restored Aevum's historical backend stack from the incorrectly imported Java + Spring Boot entry to **NestJS + TypeScript**. The previous Spring Boot Implementation Phase 1 SPEC is invalid and no longer authorizes BUILD.
+## Toolchain
 
-The revised Implementation Phase 1 PLAN and replacement NestJS/TypeScript SPEC are approved. The previous Spring Boot SPEC remains invalidated. The phase is `READY_FOR_BUILD`, but implementation has not started; Codex must receive an explicit BUILD instruction before the phase may enter `BUILDING`.
+- Node.js `24.21.0` (supported range `>=24.21.0 <25`)
+- pnpm `12.3.4`
+- Next.js `16.3.3`, React `19.2.8`, TypeScript `5.9.3`
+- NestJS `11.2.3` with TypeScript `5.9.3` and CommonJS output
+- PostgreSQL `18` + pgvector `0.8.6`
 
-## Technology direction
+The repository is one pnpm workspace with `frontend` and `backend`, plus a single root `pnpm-lock.yaml`.
 
-The approved V1 architecture direction is:
+## Local setup
 
-- Frontend: **Next.js + TypeScript**
-- Backend: **NestJS + TypeScript**
-- Primary database: **PostgreSQL**
-- Vector capability: **pgvector**
+Install the pinned Node and pnpm versions, then install dependencies from the lockfile:
 
-The initial backend/application-services direction remains a **modular monolith** with clear logical boundaries rather than premature microservices.
+```powershell
+node --version
+pnpm --version
+pnpm install --frozen-lockfile
+```
 
-Detailed architecture constraints are defined under [`docs/`](docs/).
+Create local configuration files from their committed safe examples:
 
-## Documentation map
+```powershell
+Copy-Item infra/.env.example infra/.env
+Copy-Item backend/.env.example backend/.env
+Copy-Item frontend/.env.local.example frontend/.env.local
+```
 
-Start here:
+The local files are ignored by Git. `backend/.env` holds the server-only `DATABASE_URL`; do not put it in frontend configuration.
 
-- [`AGENTS.md`](AGENTS.md) — rules for Codex and other implementation agents
-- [`docs/PROJECT.md`](docs/PROJECT.md) — stable project identity and principles
-- [`docs/PRODUCT.md`](docs/PRODUCT.md) — product model and product philosophy
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — system architecture baseline
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) — historical planning hierarchy and implementation execution direction
-- [`docs/DECISIONS.md`](docs/DECISIONS.md) — active, provisional, unresolved, and superseded project decisions
-- [`docs/PROGRESS.md`](docs/PROGRESS.md) — actual implementation/PSB status
-- [`docs/PSB-WORKFLOW.md`](docs/PSB-WORKFLOW.md) — Plan → Spec → Build lifecycle
-- [`docs/phases/`](docs/phases/) — historical planning archive
-- [`docs/implementation/`](docs/implementation/) — canonical real PSB implementation contracts
+## Run locally
 
-## Historical planning and implementation
+Start PostgreSQL and wait for its `postgres` service to report healthy:
 
-`docs/phases/` preserves the planning history that established Aevum's product model, architecture direction, and AI/core-system design through Phase 3B.8.
+```powershell
+docker compose --env-file infra/.env -f infra/compose.yaml up -d
+docker compose --env-file infra/.env -f infra/compose.yaml ps
+```
 
-Those files are **not automatically executable BUILD units**.
+Apply the migration. It explicitly reads `backend/.env` through `--envPath .env`; no `DATABASE_URL` shell export is needed.
 
-Real application work is defined separately under `docs/implementation/`. A coding agent may implement application code only when the active implementation file is explicitly marked `READY_FOR_BUILD`.
+```powershell
+pnpm --filter @aevum/backend db:migrate
+```
 
-## Source of truth
+Start the backend and frontend in separate terminals:
 
-The Git repository is the operational source of truth for Aevum. Historical planning material is retained as supporting archive evidence and may be consulted to repair proven migration defects. When information conflicts, follow the precedence rules in [`docs/PSB-WORKFLOW.md`](docs/PSB-WORKFLOW.md) and [`AGENTS.md`](AGENTS.md).
+```powershell
+pnpm --filter @aevum/backend dev
+pnpm --filter @aevum/frontend dev
+```
 
-## Current development state
+Open [http://localhost:3000](http://localhost:3000). A healthy foundation displays:
 
-Implementation Phase 1 has been returned to PLAN because its previous Java/Spring Boot architecture and resulting SPEC were based on a repository migration defect.
+```text
+Aevum application foundation is ready.
+Backend: UP
+Database: UP
+pgvector: AVAILABLE
+```
 
-Current lifecycle:
+The backend listens on `http://localhost:8080`; its only Phase 1 endpoint is `GET /api/system/status`.
 
-- PLAN: `PLAN_APPROVED`;
-- previous SPEC: `SPEC_INVALIDATED`;
-- replacement SPEC: `SPEC_APPROVED`;
-- build eligibility: `READY_FOR_BUILD`;
-- BUILD: `NOT_STARTED`;
-- previous Spring Boot BUILD attempt: halted before commit and never accepted;
-- accepted/committed implementation from that invalidated BUILD: none.
+## Verification
 
-Only the approved replacement NestJS/TypeScript SPEC may govern the next BUILD. `READY_FOR_BUILD` does not mean implementation has started.
+Run the automated suite:
+
+```powershell
+pnpm --filter @aevum/frontend lint
+pnpm --filter @aevum/frontend typecheck
+pnpm --filter @aevum/frontend build
+pnpm --filter @aevum/backend lint
+pnpm --filter @aevum/backend typecheck
+pnpm --filter @aevum/backend build
+pnpm --filter @aevum/backend test
+pnpm --filter @aevum/backend test:integration
+pnpm verify
+```
+
+The integration suite uses a real `pgvector/pgvector:0.8.6-pg18-trixie` Testcontainers database, applies the production migration, checks PostgreSQL 18 and pgvector 0.8.6, and exercises ready, extension-absent, and database-unreachable status behavior.
+
+For a clean local database check, remove the Compose volume, start it again, and run the migration twice:
+
+```powershell
+docker compose --env-file infra/.env -f infra/compose.yaml down -v
+docker compose --env-file infra/.env -f infra/compose.yaml up -d
+pnpm --filter @aevum/backend db:migrate
+pnpm --filter @aevum/backend db:migrate
+```
+
+## Project governance
+
+The Phase 1 closeout record is in [docs/implementation/PHASE-01.md](docs/implementation/PHASE-01.md). The Aevum PSB Guide marked the completed replacement BUILD `VERIFIED` and `CLOSED`. Historical documents under `docs/phases/` are archival and are not BUILD contracts.

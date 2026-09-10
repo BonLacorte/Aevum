@@ -4,9 +4,11 @@ PLAN status: `PLAN_APPROVED`
 Previous SPEC status: `SPEC_INVALIDATED`  
 Replacement SPEC status: `SPEC_APPROVED`  
 Build eligibility: `READY_FOR_BUILD`  
-BUILD status: `NOT_STARTED`
+BUILD status: `COMPLETED`
+Verification: `VERIFIED`
+Phase lifecycle: `CLOSED`
 
-> A historical architecture migration defect invalidated the previous Java/Spring Boot PLAN assumptions and detailed SPEC. That earlier BUILD was halted before commit and was never accepted. The revised PLAN and replacement NestJS/TypeScript SPEC in this document are approved. `READY_FOR_BUILD` authorizes implementation only after Codex receives an explicit BUILD instruction; the current replacement BUILD has not started.
+> A historical architecture migration defect invalidated the previous Java/Spring Boot PLAN assumptions and detailed SPEC. That earlier BUILD was halted before commit and was never accepted. The revised PLAN and replacement NestJS/TypeScript SPEC in this document are approved. The replacement BUILD completed and passed final PSB review on 2026-09-10; this phase is `VERIFIED` and `CLOSED`.
 
 ## Historical correction record
 
@@ -655,11 +657,13 @@ Current state:
 - previous SPEC: `SPEC_INVALIDATED`
 - replacement SPEC: `SPEC_APPROVED`
 - Build eligibility: `READY_FOR_BUILD`
-- BUILD: `NOT_STARTED`
+- BUILD: `COMPLETED`
+- Verification: `VERIFIED`
+- Phase lifecycle: `CLOSED`
 - Previous Spring Boot BUILD attempt: halted before commit and never accepted
 - Accepted/committed Phase 1 implementation from that invalidated BUILD: none
 
-The replacement NestJS/TypeScript SPEC below has passed PSB review. `READY_FOR_BUILD` authorizes implementation only after Codex receives an explicit BUILD instruction; until then the phase is not `BUILDING`.
+The replacement NestJS/TypeScript SPEC below passed PSB review and governed the completed replacement BUILD. The final PSB review result is recorded in the closeout record below.
 
 ### PLAN Approval Record
 
@@ -719,7 +723,7 @@ Approved lifecycle at this READY_FOR_BUILD checkpoint:
 - Build eligibility: `READY_FOR_BUILD`
 - BUILD: `NOT_STARTED`
 
-The replacement SPEC is approved and may govern implementation once Codex receives an explicit BUILD instruction. The phase is not yet `BUILDING`.
+At that checkpoint, the replacement SPEC was approved to govern implementation once Codex received an explicit BUILD instruction. The phase was not yet `BUILDING`.
 
 ## 23. Resolved toolchain and framework versions
 
@@ -2449,11 +2453,11 @@ Implementation Phase 1 is Done only when:
 - `docs/PROGRESS.md` is updated to the actual post-BUILD state only after implementation/review;
 - the phase is not marked `VERIFIED` or `CLOSED` until the PSB review explicitly reaches those gates.
 
-## 46. SPEC approval and BUILD-readiness state
+## 46. SPEC approval and BUILD-readiness record
 
 The Aevum PSB Guide has approved this replacement SPEC.
 
-Current state:
+At the `READY_FOR_BUILD` checkpoint:
 
 - PLAN: `PLAN_APPROVED`
 - previous SPEC: `SPEC_INVALIDATED`
@@ -2463,7 +2467,7 @@ Current state:
 
 The invalidated Spring Boot SPEC remains historical invalidation context only and is not an implementation source. Its associated BUILD was halted before commit and was never accepted.
 
-`READY_FOR_BUILD` means this approved NestJS/TypeScript contract is eligible to enter implementation. It does **not** mean BUILD has begun. The phase becomes `BUILDING` only when Codex is explicitly instructed to start implementation from this approved contract.
+`READY_FOR_BUILD` authorized implementation after the explicit Codex BUILD instruction received on 2026-09-10. The phase then entered `BUILDING`; final PSB review subsequently reached `VERIFIED` and `CLOSED`, as recorded below.
 
 ## 47. SPEC Approval Record — Aevum PSB Guide
 
@@ -2512,3 +2516,22 @@ The following review checklist was satisfied when the Aevum PSB Guide approved t
 - [x] The replacement SPEC passed PSB review and the READY_FOR_BUILD checkpoint correctly records `SPEC_APPROVED`, `READY_FOR_BUILD`, and current BUILD `NOT_STARTED`; implementation starts only after an explicit Codex BUILD instruction.
 
 **SPEC review result:** `APPROVED`
+
+## 48. BUILD closeout record — VERIFIED/CLOSED
+
+The Aevum PSB Guide completed final BUILD review on 2026-09-10.
+
+- PLAN: `PLAN_APPROVED`
+- previous SPEC: `SPEC_INVALIDATED`
+- replacement SPEC: `SPEC_APPROVED`
+- BUILD: `COMPLETED`
+- verification: `VERIFIED`
+- phase lifecycle: `CLOSED`
+
+All **42/42 acceptance criteria** and the Definition of Done passed through the Codex BUILD verification and independent local-host verification.
+
+Verified evidence includes Node.js `24.21.0`, npm `11.19.0`, pnpm `12.3.4`, TypeScript `5.9.3` in both workspaces, frontend lint/typecheck/build, backend lint/typecheck/build, 9/9 backend unit tests, 3/3 real Testcontainers integration tests, PostgreSQL `18.6`, pgvector `0.8.6`, clean migration plus successful no-op rerun, browser READY/database-down/backend-down recovery checks, narrow CORS, local environment ignore/trackability checks, `pnpm install --frozen-lockfile`, `pnpm verify`, and `git diff --check` with exit code `0`.
+
+The first destructive Compose reset collided with an unrelated local `fintech-ledger` project because both resolved through the generic `infra` project name. Aevum was subsequently isolated with Compose project identity `name: aevum`, and the corrected clean-database verification passed. This record does not claim recovery of the unrelated project’s removed Docker resources or data.
+
+Phase 1 non-goals remained excluded. The invalidated Spring Boot BUILD remains unaccepted historical context only. No Phase 2 work is authorized by this closeout.
