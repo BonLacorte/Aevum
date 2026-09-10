@@ -8,6 +8,8 @@ The historical roadmap represents planning structure. A historical phase is not 
 
 Historical planning lives under `docs/phases/`. Real implementation contracts live under `docs/implementation/`.
 
+A backend-stack migration correction restored Aevum's historical backend from the incorrectly imported Java + Spring Boot entry to **NestJS + TypeScript**. This correction does not change the roadmap hierarchy.
+
 ## Historical planning hierarchy
 
 ```text
@@ -44,7 +46,7 @@ Phase 1
 |---|---|---|
 | Phase 1 | Establish the Aevum product foundation, vision, target use, and early product direction. | Preserve as foundational historical planning; implementation slices inherit its durable context. |
 | Phase 1.2 | Refine the product model toward general-purpose life organization and away from a developer-centric Projects model. | Superseding product refinement inherited by implementation work. |
-| Phase 2 | Establish the V1 architecture and core technology direction. | Durable stack/architecture decisions constrain implementation phases; not one automatic code release. |
+| Phase 2 | Establish the V1 architecture and core technology direction. | Durable stack/architecture decisions constrain implementation phases; backend corrected to NestJS + TypeScript; not one automatic code release. |
 | Phase 3 | AI Fundamentals parent track. | Historical planning context; implementation must be converted into appropriately scoped contracts. |
 | Phase 3A.1–3A.11 | AI-engineering fundamentals and durable principles. | Preserved inside `docs/phases/PHASE-03A.md`; not automatic BUILD units. |
 | Phase 3B.1–3B.8 | Aevum core-system/AI architecture planning. | Preserved inside `docs/phases/PHASE-03B.md`; not automatic BUILD units. |
@@ -65,18 +67,20 @@ Real implementation phases are independently scoped through PSB and tracked unde
 
 | Implementation phase | Purpose | Current state |
 |---|---|---|
-| Implementation Phase 1 — Executable Application Foundation | Prove the locally runnable Next.js + TypeScript → Spring Boot → PostgreSQL + pgvector foundation without implementing major Aevum product features. | `PLAN_APPROVED` / `NOT_READY_FOR_BUILD` |
+| Implementation Phase 1 — Executable Application Foundation | Prove the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation without implementing major Aevum product features. | Revised PLAN `PLAN_APPROVED`; previous SPEC `SPEC_INVALIDATED`; replacement SPEC `NOT_STARTED`; `NOT_READY_FOR_BUILD`; BUILD `BLOCKED` |
 
 Canonical contract:
 
 - `docs/implementation/PHASE-01.md`
 
+The previous Spring Boot SPEC and READY_FOR_BUILD state are invalid because they were derived from the backend-stack migration defect. The associated BUILD was halted before commit and no implementation from that defective specification is accepted.
+
 Future implementation phases must be created through the PSB process rather than inferred automatically from the historical hierarchy.
 
 ## Next roadmap action
 
-Do not create Phase 3B.9 as part of this checkpoint.
+Do not create Phase 3B.9 as part of this correction.
 
-The next implementation action is to prepare the SPEC for **Implementation Phase 1 — Executable Application Foundation** only after explicit PSB instruction.
+The revised PLAN for **Implementation Phase 1 — Executable Application Foundation** is approved.
 
-The phase must not enter BUILD until its SPEC passes review and the canonical implementation contract is explicitly marked `READY_FOR_BUILD`.
+The next PSB stage is the replacement SPEC, which remains `NOT_STARTED` at this checkpoint. The phase must not re-enter BUILD until that regenerated SPEC resolves the NestJS-specific implementation details, passes PSB review, and the canonical contract is explicitly restored to `READY_FOR_BUILD`.

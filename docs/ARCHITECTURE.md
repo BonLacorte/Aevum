@@ -4,6 +4,8 @@
 
 This document defines the approved Aevum V1 architecture baseline. Detailed implementation structure remains phase-level specification work.
 
+A backend-stack historical migration correction was applied after Repository Baseline v1 incorrectly imported Java + Spring Boot from the separate OrbisOne project. Aevum's historical backend direction is **NestJS + TypeScript**.
+
 ## System direction
 
 Aevum uses a web application architecture with an independently defined frontend, backend, relational data layer, and AI/semantic capabilities.
@@ -11,11 +13,11 @@ Aevum uses a web application architecture with an independently defined frontend
 ### Approved stack direction
 
 - Frontend: **Next.js + TypeScript**
-- Backend: **Java + Spring Boot**
+- Backend: **NestJS + TypeScript**
 - Database: **PostgreSQL**
 - Vector capability: **pgvector**
 
-See [`architecture/TECH-STACK.md`](architecture/TECH-STACK.md) for ownership boundaries and [`architecture/DATA.md`](architecture/DATA.md) for persistence principles.
+See [`architecture/TECH-STACK.md`](architecture/TECH-STACK.md) for technology direction and [`architecture/DATA.md`](architecture/DATA.md) for persistence principles.
 
 ## Architectural responsibilities
 
@@ -28,6 +30,8 @@ It should not become the authoritative persistence or security boundary for prot
 ### Backend
 
 The backend is responsible for application services, validation, authorization enforcement, persistence orchestration, AI-service orchestration where applicable, and stable API/interface boundaries.
+
+The initial application-services shape remains a **modular monolith** with explicit logical boundaries. This architectural direction does not require speculative modules or premature microservices.
 
 ### Data layer
 
@@ -61,4 +65,7 @@ The following require later specification or historical-verification work and mu
 - AI model/provider selection;
 - embedding model/provider selection;
 - detailed schema and API surface;
+- exact NestJS project/module structure;
+- ORM/database-access approach;
+- migration library;
 - observability and background-job architecture.

@@ -18,17 +18,17 @@ This register records durable Aevum decisions. Significant architectural decisio
 | D-002 | Design Aevum as a general-purpose personal organizational intelligence system. | FINALIZED | Not developer-only. |
 | D-003 | Do not make `Projects` the dominant universal life model. | FINALIZED | Projects/Activities remain optional/subordinate to broader concepts such as Goals. |
 | D-004 | Treat AI as a foundational product/architecture capability, not a decorative chatbot layer. | FINALIZED | AI work remains explicitly scoped. |
-| D-005 | Use **Next.js + TypeScript** for the V1 frontend direction. | FINALIZED | Baseline architecture. |
-| D-006 | Use **Java + Spring Boot** for the V1 backend direction. | FINALIZED | Baseline architecture. |
+| D-005 | Use **Next.js + TypeScript** for the V1 frontend direction. | FINALIZED | Historical Aevum architecture. |
 | D-007 | Use **PostgreSQL** as the V1 primary database. | FINALIZED | Primary system of record. |
 | D-008 | Use **pgvector** for V1 vector capability. | FINALIZED | Avoid a separate vector database by default. |
 | D-009 | Use the **PSB Workflow: Plan → Spec → Build** with explicit review and closure gates. | FINALIZED | See `PSB-WORKFLOW.md`. |
-| D-010 | Treat repository documentation as the operational source of truth after Baseline v1. | FINALIZED | Historical planning becomes archival. |
+| D-010 | Treat repository documentation as the operational source of truth after Baseline v1. | FINALIZED | Historical planning becomes archival, while remaining available for migration correction. |
 | D-011 | Keep BUILD scopes small enough to implement, test, review, and commit independently. | FINALIZED | Historical planning phases may need implementation slicing. |
 | D-012 | Freeze long-range roadmap expansion at **Phase 3B.8** during repository-baseline transition. | FINALIZED | Resume only through a later planning decision. |
 | D-013 | Consolidate Phase 3A sub-phases into `PHASE-03A.md` and Phase 3B sub-phases into `PHASE-03B.md`. | FINALIZED | Conceptual sub-phase boundaries remain intact. |
 | D-014 | Preserve `docs/phases/` as the historical planning archive and use **`docs/implementation/` as the canonical location for real PSB implementation contracts**. | FINALIZED | BUILD agents must execute only an active implementation contract that reaches `READY_FOR_BUILD`. |
-| D-015 | Use an initial **modular-monolith architecture direction** for the Aevum backend/application services, preserving clear logical responsibility boundaries without prematurely introducing microservices. | FINALIZED | A later approved decision may split runtime services when a demonstrated requirement justifies it. |
+| D-015 | Use an initial **modular-monolith architecture direction** for the Aevum backend/application services, preserving clear logical responsibility boundaries without prematurely introducing microservices. | FINALIZED | Unchanged by the backend-stack migration correction. |
+| D-016 | Use **NestJS + TypeScript** for the V1 backend direction. | FINALIZED | Historical Aevum/LifeOS backend restored after correcting the Baseline v1 cross-project migration defect. |
 
 ## Provisional / unresolved architecture areas
 
@@ -52,6 +52,19 @@ This register records durable Aevum decisions. Significant architectural decisio
 
 Earlier planning leaned toward `Projects` as a central organizing concept. Later product refinement superseded that direction in favor of a general-purpose life model where projects and activities are optional/subordinate concepts rather than the universal container.
 
+### S-003 — Incorrect Java + Spring Boot backend migration
+
+- Former repository entry: **D-006 — Use Java + Spring Boot for the V1 backend direction**
+- Former repository status: `FINALIZED`
+- Correction status: `SUPERSEDED`
+- Correct Aevum backend: **NestJS + TypeScript** under D-016
+- Cause: Java + Spring Boot was incorrectly imported into Aevum Repository Baseline v1 from the separate **OrbisOne** project during historical migration.
+- Historical meaning: this was a repository migration defect, not a valid Aevum architecture decision.
+- Unchanged by correction: **PostgreSQL**, **pgvector**, and the initial **modular-monolith** direction.
+- Implementation consequence: the Java/Spring Boot Implementation Phase 1 SPEC was invalidated and the affected BUILD was halted before commit.
+
 ## Migration note
 
 An unavailable exact historical detail is recorded as a migration gap in the relevant historical phase document; it is not automatically classified as an unresolved product decision.
+
+The backend-stack correction above is different from a migration gap: historical context was recovered strongly enough to identify the previous Java/Spring Boot entry as cross-project contamination and restore the Aevum NestJS + TypeScript decision.

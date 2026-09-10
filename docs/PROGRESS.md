@@ -3,31 +3,45 @@
 ## Repository baseline
 
 - Baseline version: **v1**
-- Baseline state: **COMPLETE**
+- Baseline state: **COMPLETE — backend-stack historical correction recorded**
 - Historical planning coverage: **Phase 1 through Phase 3B.8**
 - Historical planning location: **`docs/phases/`**
 - Implementation contract location: **`docs/implementation/`**
 - Further historical roadmap expansion: **HALTED**
-- Application implementation: **NOT STARTED**
-- Current BUILD: **NONE**
+- Accepted/committed Phase 1 application implementation: **NONE**
+- Current BUILD: **`BLOCKED` — halted before commit due specification defect**
 
 ## Current PSB activity
 
-**Implementation Phase 1 — Executable Application Foundation** has completed PLAN and SPEC review and is now ready for implementation.
+A historical architecture migration defect was identified before the current Implementation Phase 1 BUILD could be accepted or committed.
 
-The canonical approved implementation contract is:
+The repository had incorrectly imported **Java + Spring Boot** from the separate **OrbisOne** project as Aevum's backend. Historical Aevum/LifeOS architecture has been restored to:
 
-- `docs/implementation/PHASE-01.md`
+```text
+Next.js + TypeScript
+  ↓
+NestJS + TypeScript
+  ↓
+PostgreSQL + pgvector
+```
+
+The initial modular-monolith direction remains active.
+
+The previous Spring Boot Implementation Phase 1 SPEC is invalid and no longer authorizes implementation.
 
 Current phase state:
 
-- PLAN: `PLAN_APPROVED`
-- SPEC: `SPEC_APPROVED`
-- Build eligibility: `READY_FOR_BUILD`
-- Application implementation: `NOT STARTED`
-- Current BUILD: `NONE`
+- revised PLAN: `PLAN_APPROVED`
+- previous SPEC: `SPEC_INVALIDATED`
+- replacement SPEC: `NOT_STARTED`
+- Build eligibility: `NOT_READY_FOR_BUILD`
+- BUILD: `BLOCKED`
+- Previous BUILD attempt: **HALTED BEFORE COMMIT**
+- Accepted/committed application implementation: **NONE**
 
-`READY_FOR_BUILD` authorizes the next PSB transition, but the phase is not `BUILDING` until Codex actually begins implementation.
+Canonical current PLAN:
+
+- `docs/implementation/PHASE-01.md`
 
 ## Milestones
 
@@ -36,32 +50,52 @@ Current phase state:
 | Historical planning through Phase 3B.8 | COMPLETE |
 | Repository documentation architecture | COMPLETE |
 | Repository Baseline v1 | COMPLETE |
+| Backend-stack historical correction | COMPLETE |
 | Implementation-phase documentation convention | ADOPTED |
-| Implementation Phase 1 PLAN | APPROVED |
-| Implementation Phase 1 SPEC | APPROVED |
-| Implementation Phase 1 READY_FOR_BUILD | READY |
-| Application code | NOT STARTED |
+| Implementation Phase 1 original PLAN | INVALIDATED IN PART BY BACKEND MIGRATION DEFECT |
+| Implementation Phase 1 revised PLAN | APPROVED |
+| Implementation Phase 1 previous SPEC | INVALIDATED |
+| Implementation Phase 1 replacement SPEC | NOT STARTED |
+| Implementation Phase 1 READY_FOR_BUILD | REVOKED / NOT READY |
+| Implementation Phase 1 BUILD | BLOCKED / HALTED BEFORE COMMIT |
+| Accepted/committed Phase 1 application code | NONE |
 
 ## Current implementation phase
 
 **Implementation Phase 1 — Executable Application Foundation**
 
-Primary purpose:
+Preserved purpose:
 
-> Prove that Aevum can exist as a correctly structured, locally runnable application using Next.js + TypeScript, Java + Spring Boot, PostgreSQL, and pgvector capability without implementing major product features.
+> Prove that Aevum's executable application foundation works locally without implementing major Aevum product features.
 
-Canonical implementation contract:
+Corrected architecture boundary:
+
+```text
+Browser
+  ↓
+Next.js + TypeScript frontend
+  ↓
+HTTP application contract
+  ↓
+NestJS + TypeScript backend
+  ↓
+PostgreSQL + pgvector
+```
+
+Canonical implementation PLAN:
 
 - `docs/implementation/PHASE-01.md`
 
 ## Next milestone
 
-Begin the Codex BUILD for Implementation Phase 1 only when explicitly instructed to start implementation.
+The revised Implementation Phase 1 PLAN is approved.
 
-At that point, `docs/implementation/PHASE-01.md` is the authoritative BUILD contract. The BUILD must remain inside the approved PLAN/SPEC scope and preserve all non-goals, acceptance criteria, Definition of Done, versions, and contracts.
+The replacement SPEC is `NOT_STARTED` at this checkpoint. When explicitly begun, it must resolve the reopened NestJS/toolchain/project-structure/database-access/migration/API/testing/runtime-configuration decisions and pass PSB review before the phase can become `READY_FOR_BUILD` again.
 
 ## Status rule
 
 `ROADMAP.md` describes intended sequence. This file describes what actually exists.
 
 Historical planning under `docs/phases/` is not considered implemented merely because it is documented. Application behavior exists only after the corresponding implementation contract is built, reviewed, verified, and reflected here.
+
+The halted pre-commit BUILD does not count as accepted application implementation.

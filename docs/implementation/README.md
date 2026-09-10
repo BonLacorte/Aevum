@@ -48,6 +48,8 @@ CLOSED
 
 A phase becomes executable only when its implementation contract is explicitly marked `READY_FOR_BUILD` after SPEC review.
 
+If a migration/specification defect invalidates an approved contract, `READY_FOR_BUILD` may be revoked and any affected BUILD must stop until the contract returns through the necessary PSB review stages.
+
 ## Coding-agent rule
 
 Before changing application code, Codex or another coding agent must read the active file in this directory and confirm that it is marked `READY_FOR_BUILD`.
@@ -64,7 +66,12 @@ See:
 ## Current implementation phase
 
 - [`PHASE-01.md`](PHASE-01.md) — **Implementation Phase 1 — Executable Application Foundation**
-  - PLAN: `PLAN_APPROVED`
-  - SPEC: `SPEC_APPROVED`
-  - Build eligibility: `READY_FOR_BUILD`
-  - BUILD: `NOT_STARTED`
+  - revised PLAN: `PLAN_APPROVED`
+  - previous SPEC: `SPEC_INVALIDATED`
+  - replacement SPEC: `NOT_STARTED`
+  - Build eligibility: `NOT_READY_FOR_BUILD`
+  - BUILD: `BLOCKED`
+  - Previous BUILD attempt: halted before commit
+  - Accepted/committed Phase 1 implementation: none
+
+The previous Java/Spring Boot SPEC is not an executable contract. The revised PLAN is approved, but the replacement SPEC remains `NOT_STARTED`. Phase 1 must pass replacement SPEC review before it can return to `READY_FOR_BUILD`.
