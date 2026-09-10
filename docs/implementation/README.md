@@ -63,15 +63,25 @@ See:
 - [`../PROGRESS.md`](../PROGRESS.md)
 - [`../DECISIONS.md`](../DECISIONS.md)
 
-## Current implementation phase
+## Implementation phase status
 
 - [`PHASE-01.md`](PHASE-01.md) — **Implementation Phase 1 — Executable Application Foundation**
-  - PLAN: `PLAN_APPROVED`
-  - previous SPEC: `SPEC_INVALIDATED`
-  - replacement SPEC: `SPEC_APPROVED`
-  - Build eligibility: `READY_FOR_BUILD`
-  - BUILD: `NOT_STARTED`
-  - Previous Spring Boot BUILD attempt: halted before commit and never accepted
-  - Accepted/committed implementation from that invalidated BUILD: none
+  - Lifecycle: `CLOSED`
+  - Result: accepted executable foundation
+  - Acceptance: all 42 acceptance criteria and Definition of Done passed
+  - Architecture: Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector
+  - Contract remains closed and must not be modified as part of Phase 2 planning.
 
-The approved replacement NestJS/TypeScript SPEC is the canonical BUILD contract. `READY_FOR_BUILD` authorizes implementation only after Codex receives an explicit BUILD instruction; the phase is not yet `BUILDING`.
+- [`PHASE-02.md`](PHASE-02.md) — **Implementation Phase 2 — Identity & Ownership Foundation**
+  - PLAN: `PLAN_APPROVED`
+  - SPEC: `NOT_STARTED`
+  - Build eligibility: `NOT_READY_FOR_BUILD`
+  - BUILD: `NOT_STARTED`
+
+Phase 2 is now the active PSB planning contract. Its approved purpose is to establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores real user-owned personal life data.
+
+The approved ownership invariant is:
+
+> **Authenticated server-side application context determines the Aevum owner.**
+
+PLAN approval does not authorize application code. Phase 2 must pass a detailed SPEC review before it may become `READY_FOR_BUILD`.

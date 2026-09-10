@@ -67,20 +67,26 @@ Real implementation phases are independently scoped through PSB and tracked unde
 
 | Implementation phase | Purpose | Current state |
 |---|---|---|
-| Implementation Phase 1 — Executable Application Foundation | Prove the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation without implementing major Aevum product features. | PLAN `PLAN_APPROVED`; previous SPEC `SPEC_INVALIDATED`; replacement SPEC `SPEC_APPROVED`; `READY_FOR_BUILD`; BUILD `NOT_STARTED` |
+| Implementation Phase 1 — Executable Application Foundation | Establish and verify the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation. | `CLOSED` — all 42 acceptance criteria and Definition of Done passed; merged into `main`. |
+| Implementation Phase 2 — Identity & Ownership Foundation | Establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores user-owned personal life data. | PLAN `PLAN_APPROVED`; SPEC `NOT_STARTED`; `NOT_READY_FOR_BUILD`; BUILD `NOT_STARTED`. |
 
-Canonical contract:
+Canonical contracts:
 
-- `docs/implementation/PHASE-01.md`
+- `docs/implementation/PHASE-01.md` — closed implementation record.
+- `docs/implementation/PHASE-02.md` — active approved PLAN.
 
-The previous Spring Boot SPEC and READY_FOR_BUILD state are invalid because they were derived from the backend-stack migration defect. The associated BUILD was halted before commit and no implementation from that defective specification is accepted.
+Implementation Phase 2 was selected by dependency order rather than historical phase numbering. It establishes the authenticated ownership prerequisite before durable personal-content domains such as Goals, Journal, Memories, or Chat.
 
-Future implementation phases must be created through the PSB process rather than inferred automatically from the historical hierarchy.
+The approved reusable ownership invariant is:
+
+> **Authenticated server-side application context determines the Aevum owner.**
+
+Future implementation phases continue to be created through PSB rather than inferred automatically from the historical hierarchy.
 
 ## Next roadmap action
 
-Do not create Phase 3B.9 as part of this correction.
+The next PSB stage is the detailed SPEC for **Implementation Phase 2 — Identity & Ownership Foundation**, but SPEC remains `NOT_STARTED` at this checkpoint.
 
-The revised PLAN and replacement NestJS/TypeScript SPEC for **Implementation Phase 1 — Executable Application Foundation** are approved.
+The authentication provider/mechanism is intentionally unresolved. The Phase 2 SPEC must define the identity-to-internal-user mapping/reconciliation boundary and minimize persisted authentication data before the phase may become `READY_FOR_BUILD`.
 
-The phase is now `READY_FOR_BUILD`. The next PSB lifecycle transition occurs only when Codex is explicitly instructed to start implementation. Until then, BUILD remains `NOT_STARTED` and the phase is not `BUILDING`.
+Do not begin a product-domain implementation or Phase 2 BUILD from PLAN approval alone.

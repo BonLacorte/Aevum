@@ -8,14 +8,16 @@
 - Historical planning location: **`docs/phases/`**
 - Implementation contract location: **`docs/implementation/`**
 - Further historical roadmap expansion: **HALTED**
-- Phase 1 implementation: **VERIFIED / CLOSED BY PSB GUIDE — deliberately uncommitted in the current working tree**
-- Current BUILD: **`COMPLETED` — replacement NestJS/TypeScript BUILD was verified and closed by the Aevum PSB Guide on 2026-09-10**
+- Current authoritative branch/state: **`main` — clean after Implementation Phase 1 closure**
+- Current BUILD: **NONE**
 
-## Current PSB activity
+## Completed implementation
 
-A historical architecture migration defect was identified before the current Implementation Phase 1 BUILD could be accepted or committed.
+### Implementation Phase 1 — Executable Application Foundation
 
-The repository had incorrectly imported **Java + Spring Boot** from the separate **OrbisOne** project as Aevum's backend. Historical Aevum/LifeOS architecture has been restored to:
+Lifecycle: `CLOSED`
+
+Accepted result:
 
 ```text
 Next.js + TypeScript
@@ -25,98 +27,74 @@ NestJS + TypeScript
 PostgreSQL + pgvector
 ```
 
-The initial modular-monolith direction remains active.
+Phase 1 passed all **42 acceptance criteria** and its **Definition of Done**. The accepted implementation is merged into `main` and is the current executable foundation.
 
-The previous Spring Boot Implementation Phase 1 SPEC remains invalid and does not authorize implementation. Its associated BUILD was halted before commit and was never accepted.
+The earlier invalid Spring Boot attempt remains historical correction context only; it was halted before commit and was never accepted.
 
-The replacement NestJS/TypeScript SPEC passed PSB review. Its explicit BUILD completed, and the Aevum PSB Guide independently verified and closed the phase on 2026-09-10.
-
-Current phase state:
-
-- PLAN: `PLAN_APPROVED`
-- previous SPEC: `SPEC_INVALIDATED`
-- replacement SPEC: `SPEC_APPROVED`
-- Build eligibility: `READY_FOR_BUILD`
-- BUILD: `COMPLETED`
-- Verification: `VERIFIED`
-- Phase lifecycle: `CLOSED`
-- Previous Spring Boot BUILD attempt: **HALTED BEFORE COMMIT / NEVER ACCEPTED**
-- Accepted/committed implementation from that invalidated BUILD: **NONE**
-
-Canonical current implementation contract:
+Canonical closed contract:
 
 - `docs/implementation/PHASE-01.md`
 
-The final PSB review result is `VERIFIED`; the phase lifecycle is `CLOSED`.
+## Current PSB activity
+
+### Implementation Phase 2 — Identity & Ownership Foundation
+
+Current lifecycle:
+
+- PLAN: `PLAN_APPROVED`
+- SPEC: `NOT_STARTED`
+- Build eligibility: `NOT_READY_FOR_BUILD`
+- BUILD: `NOT_STARTED`
+
+Approved purpose:
+
+> Establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum begins storing real user-owned personal life data.
+
+Approved ownership invariant:
+
+> **Authenticated server-side application context determines the Aevum owner.**
+
+Future domain APIs must not trust arbitrary client-selected `user_id` values for ownership or authorization. The stable internal Aevum user ID is the future ownership anchor and remains distinct from mutable external identity attributes such as display name or email.
+
+Canonical active PLAN:
+
+- `docs/implementation/PHASE-02.md`
+
+### Conditions carried into SPEC
+
+The future Phase 2 SPEC must:
+
+1. precisely define the mapping/reconciliation boundary between the selected authentication identity and the stable internal Aevum user ID; and
+2. follow authentication-data minimization, avoiding persistence of provider tokens, broad profile data, or other identity artifacts unless the selected mechanism concretely requires them.
+
+The authentication provider/mechanism remains unresolved at this checkpoint.
 
 ## Milestones
 
 | Milestone | Status |
 |---|---|
 | Historical planning through Phase 3B.8 | COMPLETE |
-| Repository documentation architecture | COMPLETE |
 | Repository Baseline v1 | COMPLETE |
 | Backend-stack historical correction | COMPLETE |
-| Implementation-phase documentation convention | ADOPTED |
-| Implementation Phase 1 original PLAN | INVALIDATED IN PART BY BACKEND MIGRATION DEFECT |
-| Implementation Phase 1 revised PLAN | APPROVED |
-| Implementation Phase 1 previous SPEC | INVALIDATED |
-| Implementation Phase 1 replacement SPEC | APPROVED |
-| Implementation Phase 1 READY_FOR_BUILD | READY |
-| Current replacement BUILD | COMPLETED / VERIFIED / CLOSED |
-| Previous Spring Boot BUILD attempt | HALTED BEFORE COMMIT / NEVER ACCEPTED |
-| Accepted/committed implementation from invalidated BUILD | NONE |
-
-## Current implementation phase
-
-**Implementation Phase 1 — Executable Application Foundation**
-
-Preserved purpose:
-
-> Prove that Aevum's executable application foundation works locally without implementing major Aevum product features.
-
-Corrected architecture boundary:
-
-```text
-Browser
-  ↓
-Next.js + TypeScript frontend
-  ↓
-HTTP application contract
-  ↓
-NestJS + TypeScript backend
-  ↓
-PostgreSQL + pgvector
-```
-
-Canonical implementation contract:
-
-- `docs/implementation/PHASE-01.md`
-
-### BUILD evidence — 2026-09-10
-
-The replacement Phase 1 implementation now exists in the working tree on `build/phase-01-nestjs-foundation`:
-
-- one root pnpm workspace contains only `@aevum/frontend` and `@aevum/backend`, with one root lockfile;
-- the frontend is Next.js App Router and renders the specified foundation-status states through its single API boundary;
-- the backend is a CommonJS NestJS modular monolith limited to App, Config, Database, and System responsibilities;
-- direct `pg`, backend-owned `node-pg-migrate` migrations, PostgreSQL 18, and pgvector 0.8.6 are implemented without domain schema;
-- clean Compose initialization, two migration runs, pgvector verification, and the no-domain-table check passed using the isolated `aevum` Compose project;
-- frontend lint/typecheck/build, backend lint/typecheck/build, backend unit tests (9), and real Testcontainers integration tests (3) passed using pnpm 12.3.4;
-- an automated browser smoke test passed for READY, database-down/recovery, and backend-down/recovery behavior.
-
-Final independent local-host verification confirmed Node `v24.21.0`, npm `11.19.0`, pnpm `12.3.4`, TypeScript `5.9.3` in both workspaces, `pnpm install --frozen-lockfile`, `pnpm verify`, local environment ignore/trackability behavior, and `git diff --check` with exit code `0`. Together with the BUILD evidence above, all **42/42 acceptance criteria** and the Definition of Done passed.
-
-The first destructive Compose reset collided with an unrelated local `fintech-ledger` Compose project because both resolved through generic project identity `infra`. The Compose file was corrected with top-level `name: aevum`; the isolated Aevum clean-database verification then passed. No recovery of the unrelated project’s removed Docker resources or data is claimed.
+| Implementation Phase 1 | CLOSED |
+| Phase 1 acceptance criteria | 42 / 42 PASSED |
+| Phase 1 Definition of Done | PASSED |
+| Phase 1 merged to `main` | COMPLETE |
+| Implementation Phase 2 PLAN | APPROVED |
+| Implementation Phase 2 SPEC | NOT STARTED |
+| Implementation Phase 2 READY_FOR_BUILD | NOT READY |
+| Implementation Phase 2 BUILD | NOT STARTED |
 
 ## Next milestone
 
-Implementation Phase 1 is `CLOSED`. The next implementation work requires a separately approved and authorized phase; this closeout does not authorize Implementation Phase 2.
+Prepare the detailed SPEC for **Implementation Phase 2 — Identity & Ownership Foundation** only when explicitly instructed to begin SPEC.
+
+The SPEC must resolve the BUILD-blocking authentication, identity-mapping, persistence, frontend/backend integration, security, and verification decisions while staying inside the approved PLAN.
+
+Phase 2 remains `NOT_READY_FOR_BUILD` until that SPEC passes PSB review.
 
 ## Status rule
 
 `ROADMAP.md` describes intended sequence. This file describes what actually exists.
 
-Historical planning under `docs/phases/` is not considered implemented merely because it is documented. Application behavior exists only after the corresponding implementation contract is built, reviewed, verified, and reflected here.
-
-The halted pre-commit BUILD does not count as accepted application implementation.
+Historical planning under `docs/phases/` is supporting context and is not considered implemented merely because it is documented. Application behavior exists only after the corresponding implementation contract is built, reviewed, verified, and closed.

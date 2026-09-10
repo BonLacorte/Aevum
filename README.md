@@ -1,103 +1,80 @@
 # Aevum
 
-Aevum’s Phase 1 foundation is a minimal local application path:
+Aevum is a long-term personal organizational intelligence system designed to help people capture, organize, revisit, and understand meaningful life context. It combines structured personal information with AI-assisted retrieval and reasoning so that goals, decisions, activities, reflections, and other life context can become more useful over time.
 
-```text
-Browser → Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector
-```
+## Repository status
 
-It provides only a foundation-status screen and `GET /api/system/status`. No product domains, authentication, AI behavior, embeddings, or vector search are part of this phase. Implementation Phase 1 is `VERIFIED` and `CLOSED`.
+- Repository baseline: **v1 — complete, with backend-stack historical correction recorded**
+- Historical planning coverage: **Phase 1 through Phase 3B.8**
+- Historical planning archive: **`docs/phases/`**
+- Canonical implementation contracts: **`docs/implementation/`**
+- Implementation Phase 1: **`CLOSED`**
+- Phase 1 verification: **42 / 42 acceptance criteria passed; Definition of Done passed**
+- Current implementation phase: **Implementation Phase 2 — Identity & Ownership Foundation**
+- Phase 2 PLAN: **`PLAN_APPROVED`**
+- Phase 2 SPEC: **`NOT_STARTED`**
+- Phase 2 build eligibility: **`NOT_READY_FOR_BUILD`**
+- Phase 2 BUILD: **`NOT_STARTED`**
+- Current BUILD: **none**
+- Development workflow: **PSB — Plan → Spec → Build**
 
-## Toolchain
+Implementation Phase 1 is closed and merged into `main`. The accepted executable foundation is **Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector**.
 
-- Node.js `24.21.0` (supported range `>=24.21.0 <25`)
-- pnpm `12.3.4`
-- Next.js `16.3.3`, React `19.2.8`, TypeScript `5.9.3`
-- NestJS `11.2.3` with TypeScript `5.9.3` and CommonJS output
-- PostgreSQL `18` + pgvector `0.8.6`
+Implementation Phase 2 is now the active approved PLAN. Its purpose is to establish the minimum identity/authentication/ownership prerequisite before Aevum begins persisting real user-owned personal life data. PLAN approval does not authorize BUILD.
 
-The repository is one pnpm workspace with `frontend` and `backend`, plus a single root `pnpm-lock.yaml`.
+## Technology direction
 
-## Local setup
+The approved V1 architecture direction is:
 
-Install the pinned Node and pnpm versions, then install dependencies from the lockfile:
+- Frontend: **Next.js + TypeScript**
+- Backend: **NestJS + TypeScript**
+- Primary database: **PostgreSQL**
+- Vector capability: **pgvector**
 
-```powershell
-node --version
-pnpm --version
-pnpm install --frozen-lockfile
-```
+The initial backend/application-services direction remains a **modular monolith** with clear logical boundaries rather than premature microservices.
 
-Create local configuration files from their committed safe examples:
+Detailed architecture constraints are defined under [`docs/`](docs/).
 
-```powershell
-Copy-Item infra/.env.example infra/.env
-Copy-Item backend/.env.example backend/.env
-Copy-Item frontend/.env.local.example frontend/.env.local
-```
+## Documentation map
 
-The local files are ignored by Git. `backend/.env` holds the server-only `DATABASE_URL`; do not put it in frontend configuration.
+Start here:
 
-## Run locally
+- [`AGENTS.md`](AGENTS.md) — rules for Codex and other implementation agents
+- [`docs/PROJECT.md`](docs/PROJECT.md) — stable project identity and principles
+- [`docs/PRODUCT.md`](docs/PRODUCT.md) — product model and product philosophy
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — system architecture baseline
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — historical planning hierarchy and implementation execution direction
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — active, provisional, unresolved, and superseded project decisions
+- [`docs/PROGRESS.md`](docs/PROGRESS.md) — actual implementation/PSB status
+- [`docs/PSB-WORKFLOW.md`](docs/PSB-WORKFLOW.md) — Plan → Spec → Build lifecycle
+- [`docs/phases/`](docs/phases/) — historical planning archive
+- [`docs/implementation/`](docs/implementation/) — canonical real PSB implementation contracts
 
-Start PostgreSQL and wait for its `postgres` service to report healthy:
+## Historical planning and implementation
 
-```powershell
-docker compose --env-file infra/.env -f infra/compose.yaml up -d
-docker compose --env-file infra/.env -f infra/compose.yaml ps
-```
+`docs/phases/` preserves the planning history that established Aevum's product model, architecture direction, and AI/core-system design through Phase 3B.8.
 
-Apply the migration. It explicitly reads `backend/.env` through `--envPath .env`; no `DATABASE_URL` shell export is needed.
+Those files are **not automatically executable BUILD units**.
 
-```powershell
-pnpm --filter @aevum/backend db:migrate
-```
+Real application work is defined separately under `docs/implementation/`. A coding agent may implement application code only when the active implementation file is explicitly marked `READY_FOR_BUILD`.
 
-Start the backend and frontend in separate terminals:
+## Source of truth
 
-```powershell
-pnpm --filter @aevum/backend dev
-pnpm --filter @aevum/frontend dev
-```
+The Git repository is the operational source of truth for Aevum. Historical planning material is retained as supporting archive evidence and may be consulted to repair proven migration defects. When information conflicts, follow the precedence rules in [`docs/PSB-WORKFLOW.md`](docs/PSB-WORKFLOW.md) and [`AGENTS.md`](AGENTS.md).
 
-Open [http://localhost:3000](http://localhost:3000). A healthy foundation displays:
+## Current development state
 
-```text
-Aevum application foundation is ready.
-Backend: UP
-Database: UP
-pgvector: AVAILABLE
-```
+Implementation Phase 1 is `CLOSED` and its accepted implementation is merged into `main`.
 
-The backend listens on `http://localhost:8080`; its only Phase 1 endpoint is `GET /api/system/status`.
+Implementation Phase 2 current lifecycle:
 
-## Verification
+- PLAN: `PLAN_APPROVED`;
+- SPEC: `NOT_STARTED`;
+- build eligibility: `NOT_READY_FOR_BUILD`;
+- BUILD: `NOT_STARTED`.
 
-Run the automated suite:
+The approved ownership invariant is:
 
-```powershell
-pnpm --filter @aevum/frontend lint
-pnpm --filter @aevum/frontend typecheck
-pnpm --filter @aevum/frontend build
-pnpm --filter @aevum/backend lint
-pnpm --filter @aevum/backend typecheck
-pnpm --filter @aevum/backend build
-pnpm --filter @aevum/backend test
-pnpm --filter @aevum/backend test:integration
-pnpm verify
-```
+> **Authenticated server-side application context determines the Aevum owner.**
 
-The integration suite uses a real `pgvector/pgvector:0.8.6-pg18-trixie` Testcontainers database, applies the production migration, checks PostgreSQL 18 and pgvector 0.8.6, and exercises ready, extension-absent, and database-unreachable status behavior.
-
-For a clean local database check, remove the Compose volume, start it again, and run the migration twice:
-
-```powershell
-docker compose --env-file infra/.env -f infra/compose.yaml down -v
-docker compose --env-file infra/.env -f infra/compose.yaml up -d
-pnpm --filter @aevum/backend db:migrate
-pnpm --filter @aevum/backend db:migrate
-```
-
-## Project governance
-
-The Phase 1 closeout record is in [docs/implementation/PHASE-01.md](docs/implementation/PHASE-01.md). The Aevum PSB Guide marked the completed replacement BUILD `VERIFIED` and `CLOSED`. Historical documents under `docs/phases/` are archival and are not BUILD contracts.
+The exact authentication provider/mechanism remains a SPEC-stage decision. No application code is authorized by the Phase 2 PLAN approval checkpoint.
