@@ -6,3 +6,6 @@
 frontend/.next/
 backend/dist/
 backend/coverage/
+
+# TypeScript incremental build metadata
+*.tsbuildinfo
