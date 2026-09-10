@@ -1,0 +1,8 @@
+/backend/.env
+/frontend/.env.local
+/infra/.env
+**/node_modules/
+.pnpm-store/
+frontend/.next/
+backend/dist/
+backend/coverage/

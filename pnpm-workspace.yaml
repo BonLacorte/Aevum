@@ -1,0 +1,9 @@
+packages:
+  - frontend
+  - backend
+allowBuilds:
+  '@parcel/watcher': true
+  cpu-features: false
+  protobufjs: true
+  ssh2: false
+  unrs-resolver: true

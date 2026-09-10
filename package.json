@@ -1,0 +1,21 @@
+{
+  "name": "aevum",
+  "private": true,
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "dev:frontend": "pnpm --filter @aevum/frontend dev",
+    "dev:backend": "pnpm --filter @aevum/backend dev",
+    "db:up": "docker compose --env-file infra/.env -f infra/compose.yaml up -d",
+    "db:down": "docker compose --env-file infra/.env -f infra/compose.yaml down",
+    "db:migrate": "pnpm --filter @aevum/backend db:migrate",
+    "lint": "pnpm --filter @aevum/frontend lint && pnpm --filter @aevum/backend lint",
+    "typecheck": "pnpm --filter @aevum/frontend typecheck && pnpm --filter @aevum/backend typecheck",
+    "build": "pnpm --filter @aevum/frontend build && pnpm --filter @aevum/backend build",
+    "test": "pnpm --filter @aevum/backend test",
+    "test:integration": "pnpm --filter @aevum/backend test:integration",
+    "verify": "pnpm lint && pnpm typecheck && pnpm build && pnpm test && pnpm test:integration"
+  }
+}
