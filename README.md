@@ -12,15 +12,17 @@ Aevum is a long-term personal organizational intelligence system designed to hel
 - Phase 1 verification: **42 / 42 acceptance criteria passed; Definition of Done passed**
 - Current implementation phase: **Implementation Phase 2 — Identity & Ownership Foundation**
 - Phase 2 PLAN: **`PLAN_APPROVED`**
-- Phase 2 SPEC: **`NOT_STARTED`**
-- Phase 2 build eligibility: **`NOT_READY_FOR_BUILD`**
+- Phase 2 SPEC: **`SPEC_APPROVED`**
+- Phase 2 build eligibility: **`READY_FOR_BUILD`**
 - Phase 2 BUILD: **`NOT_STARTED`**
+- Phase 2 acceptance criteria: **56 approved requirements — not yet passed**
+- Phase 2 Definition of Done: **approved — not yet satisfied**
 - Current BUILD: **none**
 - Development workflow: **PSB — Plan → Spec → Build**
 
 Implementation Phase 1 is closed and merged into `main`. The accepted executable foundation is **Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector**.
 
-Implementation Phase 2 is now the active approved PLAN. Its purpose is to establish the minimum identity/authentication/ownership prerequisite before Aevum begins persisting real user-owned personal life data. PLAN approval does not authorize BUILD.
+Implementation Phase 2 now has an approved PLAN and approved SPEC and is `READY_FOR_BUILD`. Its purpose is to establish the minimum identity/authentication/ownership prerequisite before Aevum begins persisting real user-owned personal life data. `READY_FOR_BUILD` does not mean implementation has started; Codex must receive a later explicit BUILD instruction.
 
 ## Technology direction
 
@@ -69,12 +71,14 @@ Implementation Phase 1 is `CLOSED` and its accepted implementation is merged int
 Implementation Phase 2 current lifecycle:
 
 - PLAN: `PLAN_APPROVED`;
-- SPEC: `NOT_STARTED`;
-- build eligibility: `NOT_READY_FOR_BUILD`;
+- SPEC: `SPEC_APPROVED`;
+- build eligibility: `READY_FOR_BUILD`;
 - BUILD: `NOT_STARTED`.
 
 The approved ownership invariant is:
 
 > **Authenticated server-side application context determines the Aevum owner.**
 
-The exact authentication provider/mechanism remains a SPEC-stage decision. No application code is authorized by the Phase 2 PLAN approval checkpoint.
+The approved authentication architecture uses one configurable standards-compliant OIDC issuer, NestJS as the confidential relying party and authoritative backend auth boundary, Authorization Code + PKCE, exact `(issuer, subject)` reconciliation to a stable internal Aevum UUID, and Aevum-owned opaque PostgreSQL-backed sessions.
+
+These are approved requirements only. None of the 56 acceptance criteria are claimed as passed, the Definition of Done is not yet satisfied, and no Phase 2 application implementation has started.

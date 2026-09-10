@@ -29,6 +29,7 @@ This register records durable Aevum decisions. Significant architectural decisio
 | D-014 | Preserve `docs/phases/` as the historical planning archive and use **`docs/implementation/` as the canonical location for real PSB implementation contracts**. | FINALIZED | BUILD agents must execute only an active implementation contract that reaches `READY_FOR_BUILD`. |
 | D-015 | Use an initial **modular-monolith architecture direction** for the Aevum backend/application services, preserving clear logical responsibility boundaries without prematurely introducing microservices. | FINALIZED | Unchanged by the backend-stack migration correction. |
 | D-016 | Use **NestJS + TypeScript** for the V1 backend direction. | FINALIZED | Historical Aevum/LifeOS backend restored after correcting the Baseline v1 cross-project migration defect. |
+| D-103 | Use **one configurable standards-compliant OIDC issuer** for the current authentication architecture, with **NestJS as the confidential relying party and authoritative backend authentication/authorization boundary**, **Authorization Code + PKCE**, exact validated **`(issuer, subject)`** as the external identity key, a stable server-generated **internal Aevum UUID** as the ownership anchor, an **Aevum-owned opaque PostgreSQL-backed session**, and **server-derived authenticated context** as the source of user ownership. | FINALIZED | Architecture approved by the Implementation Phase 2 SPEC. This records an approved architecture decision only; Phase 2 BUILD is `NOT_STARTED` and the authentication architecture is not yet claimed as implemented. |
 
 ## Provisional / unresolved architecture areas
 
@@ -36,7 +37,6 @@ This register records durable Aevum decisions. Significant architectural decisio
 |---|---|---|---|
 | D-101 | Exact deployment topology | PROVISIONAL | Must be specified when deployment becomes relevant. |
 | D-102 | Local-versus-cloud boundary | UNRESOLVED | Do not assume local-only or cloud-only behavior. |
-| D-103 | Authentication implementation | UNRESOLVED | Required before protected user data is implemented. |
 | D-104 | AI model/provider selection | PROVISIONAL | Select when an AI BUILD phase requires it. |
 | D-105 | Embedding model/provider selection | PROVISIONAL | Must define dimensionality and migration implications before vector persistence is implemented. |
 | D-106 | Synchronization behavior | UNRESOLVED | Specify only when synchronization enters scope. |

@@ -74,14 +74,16 @@ See:
 
 - [`PHASE-02.md`](PHASE-02.md) — **Implementation Phase 2 — Identity & Ownership Foundation**
   - PLAN: `PLAN_APPROVED`
-  - SPEC: `NOT_STARTED`
-  - Build eligibility: `NOT_READY_FOR_BUILD`
+  - SPEC: `SPEC_APPROVED`
+  - Build eligibility: `READY_FOR_BUILD`
   - BUILD: `NOT_STARTED`
+  - Acceptance criteria: **56 approved requirements — not yet executed/passed**
+  - Definition of Done: **approved — not yet satisfied**
 
-Phase 2 is now the active PSB planning contract. Its approved purpose is to establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores real user-owned personal life data.
+Phase 2 is the active canonical BUILD contract. Its approved purpose is to establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores real user-owned personal life data.
 
 The approved ownership invariant is:
 
 > **Authenticated server-side application context determines the Aevum owner.**
 
-PLAN approval does not authorize application code. Phase 2 must pass a detailed SPEC review before it may become `READY_FOR_BUILD`.
+`READY_FOR_BUILD` authorizes implementation only after Codex receives a later explicit BUILD instruction. Phase 2 is not yet `BUILDING`.

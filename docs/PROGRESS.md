@@ -42,8 +42,8 @@ Canonical closed contract:
 Current lifecycle:
 
 - PLAN: `PLAN_APPROVED`
-- SPEC: `NOT_STARTED`
-- Build eligibility: `NOT_READY_FOR_BUILD`
+- SPEC: `SPEC_APPROVED`
+- Build eligibility: `READY_FOR_BUILD`
 - BUILD: `NOT_STARTED`
 
 Approved purpose:
@@ -56,18 +56,24 @@ Approved ownership invariant:
 
 Future domain APIs must not trust arbitrary client-selected `user_id` values for ownership or authorization. The stable internal Aevum user ID is the future ownership anchor and remains distinct from mutable external identity attributes such as display name or email.
 
-Canonical active PLAN:
+Canonical active implementation contract:
 
 - `docs/implementation/PHASE-02.md`
 
-### Conditions carried into SPEC
+### Approved SPEC architecture
 
-The future Phase 2 SPEC must:
+The Phase 2 SPEC is approved with:
 
-1. precisely define the mapping/reconciliation boundary between the selected authentication identity and the stable internal Aevum user ID; and
-2. follow authentication-data minimization, avoiding persistence of provider tokens, broad profile data, or other identity artifacts unless the selected mechanism concretely requires them.
+- one configurable standards-compliant OIDC issuer;
+- NestJS as confidential relying party and authoritative backend authentication/authorization boundary;
+- Authorization Code + PKCE S256 + state + nonce;
+- exact `(issuer, subject)` external identity reconciliation;
+- stable server-generated internal Aevum UUID ownership anchor;
+- Aevum-owned opaque PostgreSQL-backed sessions;
+- authenticated server-side context as the source of ownership;
+- explicit authentication-data minimization.
 
-The authentication provider/mechanism remains unresolved at this checkpoint.
+These are approved architecture/implementation requirements. Phase 2 application implementation has **not started**.
 
 ## Milestones
 
@@ -81,17 +87,24 @@ The authentication provider/mechanism remains unresolved at this checkpoint.
 | Phase 1 Definition of Done | PASSED |
 | Phase 1 merged to `main` | COMPLETE |
 | Implementation Phase 2 PLAN | APPROVED |
-| Implementation Phase 2 SPEC | NOT STARTED |
-| Implementation Phase 2 READY_FOR_BUILD | NOT READY |
+| Implementation Phase 2 SPEC | APPROVED |
+| Phase 2 acceptance criteria | 56 APPROVED REQUIREMENTS / 0 CLAIMED PASSED |
+| Phase 2 Definition of Done | APPROVED / NOT YET SATISFIED |
+| Implementation Phase 2 READY_FOR_BUILD | READY |
 | Implementation Phase 2 BUILD | NOT STARTED |
 
 ## Next milestone
 
-Prepare the detailed SPEC for **Implementation Phase 2 — Identity & Ownership Foundation** only when explicitly instructed to begin SPEC.
+Implementation Phase 2 is now `READY_FOR_BUILD`.
 
-The SPEC must resolve the BUILD-blocking authentication, identity-mapping, persistence, frontend/backend integration, security, and verification decisions while staying inside the approved PLAN.
+The next lifecycle transition occurs only after Codex receives a later explicit BUILD instruction based on the approved `docs/implementation/PHASE-02.md` contract.
 
-Phase 2 remains `NOT_READY_FOR_BUILD` until that SPEC passes PSB review.
+Until then:
+
+- BUILD remains `NOT_STARTED`;
+- none of the 56 acceptance criteria are claimed as passed;
+- the Definition of Done is not satisfied;
+- the phase must not be marked `BUILDING`, `VERIFIED`, or `CLOSED`.
 
 ## Status rule
 

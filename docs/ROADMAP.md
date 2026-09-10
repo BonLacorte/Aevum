@@ -68,12 +68,12 @@ Real implementation phases are independently scoped through PSB and tracked unde
 | Implementation phase | Purpose | Current state |
 |---|---|---|
 | Implementation Phase 1 — Executable Application Foundation | Establish and verify the locally runnable Next.js + TypeScript → NestJS + TypeScript → PostgreSQL + pgvector foundation. | `CLOSED` — all 42 acceptance criteria and Definition of Done passed; merged into `main`. |
-| Implementation Phase 2 — Identity & Ownership Foundation | Establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores user-owned personal life data. | PLAN `PLAN_APPROVED`; SPEC `NOT_STARTED`; `NOT_READY_FOR_BUILD`; BUILD `NOT_STARTED`. |
+| Implementation Phase 2 — Identity & Ownership Foundation | Establish the minimum deterministic identity, authentication, and ownership foundation required before Aevum stores user-owned personal life data. | PLAN `PLAN_APPROVED`; SPEC `SPEC_APPROVED`; `READY_FOR_BUILD`; BUILD `NOT_STARTED`. |
 
 Canonical contracts:
 
 - `docs/implementation/PHASE-01.md` — closed implementation record.
-- `docs/implementation/PHASE-02.md` — active approved PLAN.
+- `docs/implementation/PHASE-02.md` — active approved PLAN + SPEC and canonical READY_FOR_BUILD contract.
 
 Implementation Phase 2 was selected by dependency order rather than historical phase numbering. It establishes the authenticated ownership prerequisite before durable personal-content domains such as Goals, Journal, Memories, or Chat.
 
@@ -85,8 +85,8 @@ Future implementation phases continue to be created through PSB rather than infe
 
 ## Next roadmap action
 
-The next PSB stage is the detailed SPEC for **Implementation Phase 2 — Identity & Ownership Foundation**, but SPEC remains `NOT_STARTED` at this checkpoint.
+**Implementation Phase 2 — Identity & Ownership Foundation** has an approved PLAN and approved SPEC and is now `READY_FOR_BUILD`.
 
-The authentication provider/mechanism is intentionally unresolved. The Phase 2 SPEC must define the identity-to-internal-user mapping/reconciliation boundary and minimize persisted authentication data before the phase may become `READY_FOR_BUILD`.
+The approved architecture uses one configurable standards-compliant OIDC issuer, NestJS as the authoritative confidential relying party/backend auth boundary, Authorization Code + PKCE, exact `(issuer, subject)` reconciliation to a stable internal Aevum UUID, Aevum-owned opaque PostgreSQL-backed sessions, and server-derived ownership context.
 
-Do not begin a product-domain implementation or Phase 2 BUILD from PLAN approval alone.
+These are approved requirements, not completed implementation. BUILD remains `NOT_STARTED` until Codex receives a later explicit BUILD instruction.
