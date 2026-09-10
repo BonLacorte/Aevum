@@ -1,8 +1,8 @@
 # Implementation Phase 2 — Identity & Ownership Foundation
 
 PLAN status: `PLAN_APPROVED`  
-SPEC status: `SPEC_APPROVED`  
-Build eligibility: `READY_FOR_BUILD`  
+SPEC status: `SPEC_APPROVED`
+Build eligibility: `READY_FOR_BUILD`
 BUILD status: `NOT_STARTED`
 
 Depends on: **Implementation Phase 1 — Executable Application Foundation (`CLOSED`)**
